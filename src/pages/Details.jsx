@@ -1,28 +1,31 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { IoArrowBack } from 'react-icons/io5';
-import { useState } from 'react';
 import { useEffect } from 'react';
-import { searchByCountry } from '../config';
 import { Button } from '../ui/Button/Button';
 import Info from '../components/Info/Info';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDetails } from '../store/details/details-selector';
+import { loadCountryByName } from '../store/details/details-actions';
 
 const Details = () => {
   const { name } = useParams();
   const navigate = useNavigate();
-  const [country, setCountry] = useState(null);
+  const dispatch = useDispatch();
+  const { currentCountry, error, status } = useSelector(selectDetails);
 
   useEffect(() => {
-    axios.get(searchByCountry(name)).then(({ data }) => setCountry(data[0]));
-  }, [name]);
+    dispatch(loadCountryByName(name));
+  }, [name, dispatch]);
 
   return (
     <div>
       <Button onClick={() => navigate(-1)}>
         <IoArrowBack /> Назад
       </Button>
-      {country && <Info navigate={navigate} {...country} />}
+      {status === 'loading' && <h2>Идет загрузка</h2>}
+      {error && <h2>{error}</h2>}
+      {currentCountry && <Info navigate={navigate} {...currentCountry} />}
     </div>
   );
 };

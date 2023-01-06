@@ -7,6 +7,7 @@ import { WrapperHeader } from './WrapperHeader';
 import { HeaderEl } from './HeaderEl';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTheme } from '../../store/theme/them-actions';
+import { clearControls } from '../../store/controls/controls-actions';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -20,11 +21,15 @@ const Header = () => {
     dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
   };
 
+  const cleanUp = () => {
+    dispatch(clearControls());
+  };
+
   return (
     <HeaderEl>
       <Container>
         <WrapperHeader>
-          <Title>Ntrcn</Title>
+          <Title onClick={cleanUp}>Ntrcn</Title>
           <ModeSwitcher onClick={toggleTheme}>
             {theme === 'light' ? (
               <IoMoonOutline size='14px' />
