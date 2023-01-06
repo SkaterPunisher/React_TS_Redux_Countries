@@ -1,10 +1,11 @@
-// import { useEffect } from 'react';
-import { useState } from 'react';
 import { CustomSelect } from './CustomSelect';
 import Search from './Search/Search';
 import { WrapperControls } from './WrapperControls';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectRegion } from '../../store/controls/controls-selectors';
+import { setRegion } from '../../store/controls/controls-actions';
 
-const option = [
+const optionsMap = [
   {
     value: 'Africa',
     label: 'Африка',
@@ -26,28 +27,26 @@ const option = [
     label: 'Океания',
   },
 ];
+const options = Object.values(optionsMap);
 
 const Controls = ({ onSearch }) => {
-  const [search, setSearch] = useState('');
-  const [region, setRegion] = useState('');
+  const dispatch = useDispatch();
+  const region = useSelector(selectRegion);
 
-  // useEffect(() => {
-  //   const regionValue = region?.value || '';
-  //   // onSearch(search, regionValue);
-
-  //   // eslint-disable-next-line
-  // }, [search, region]);
+  const handleSelect = (reg) => {
+    dispatch(setRegion(reg?.value || ''));
+  };
 
   return (
     <WrapperControls>
-      <Search search={search} setSearch={setSearch} />
+      <Search />
       <CustomSelect
-        options={option}
+        options={options}
         placeholder='По региону'
-        isClearable
-        isSearchable={false}
-        value={region}
-        onChange={setRegion}
+        isClearable //по Х можем очищать поле ввода
+        isSearchable={false} //запрещаем поиск по вводу в него
+        value={optionsMap[region]}
+        onChange={handleSelect}
       />
     </WrapperControls>
   );
