@@ -7,10 +7,10 @@ import { InfoTag } from './InfoTag';
 import { InfoTagGroup } from './InfoTagGroup';
 import { InfoTitle } from './InfoTitle';
 import { WrapperInfo } from './WrapperInfo';
-import { filterByCode } from '../../config';
-import axios from 'axios';
-import { useState } from 'react';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectNeighbors } from '../../store/details/details-selector';
+import { loadNeighborsByBorder } from '../../store/details/details-actions';
 
 const Info = (props) => {
   const {
@@ -27,15 +27,15 @@ const Info = (props) => {
     borders = [],
     navigate,
   } = props;
-
-  const [neighbors, setNeighbors] = useState([]);
+  const dispatch = useDispatch();
+  const neighbors = useSelector(selectNeighbors);
 
   useEffect(() => {
-    if (borders.length)
-      axios
-        .get(filterByCode(borders))
-        .then(({ data }) => setNeighbors(data.map((c) => c.name)));
-  }, [borders]);
+    if (borders.length) {
+      dispatch(loadNeighborsByBorder(borders));
+    }
+  }, [borders, dispatch]);
+
   return (
     <WrapperInfo>
       <InfoImg src={flag} alt={name} />
@@ -87,9 +87,12 @@ const Info = (props) => {
             <span>Нет соседних стран</span>
           ) : (
             <InfoTagGroup>
-              {neighbors.map((b) => (
-                <InfoTag onClick={() => navigate(`/country/${b}`)} key={b}>
-                  {b}
+              {neighbors?.map((countryName) => (
+                <InfoTag
+                  onClick={() => navigate(`/country/${countryName}`)}
+                  key={countryName}
+                >
+                  {countryName}
                 </InfoTag>
               ))}
             </InfoTagGroup>

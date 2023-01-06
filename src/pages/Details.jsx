@@ -6,7 +6,10 @@ import { Button } from '../ui/Button/Button';
 import Info from '../components/Info/Info';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDetails } from '../store/details/details-selector';
-import { loadCountryByName } from '../store/details/details-actions';
+import {
+  clearDetails,
+  loadCountryByName,
+} from '../store/details/details-actions';
 
 const Details = () => {
   const { name } = useParams();
@@ -16,6 +19,11 @@ const Details = () => {
 
   useEffect(() => {
     dispatch(loadCountryByName(name));
+
+    //при размонтировании или при переходе вызывается функция ниже
+    return () => {
+      dispatch(clearDetails());
+    };
   }, [name, dispatch]);
 
   return (
