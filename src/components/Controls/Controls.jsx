@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useState } from 'react';
 import { CustomSelect } from './CustomSelect';
 import Search from './Search/Search';
@@ -31,12 +31,12 @@ const Controls = ({ onSearch }) => {
   const [search, setSearch] = useState('');
   const [region, setRegion] = useState('');
 
-  useEffect(() => {
-    const regionValue = region?.value || '';
-    onSearch(search, regionValue);
+  // useEffect(() => {
+  //   const regionValue = region?.value || '';
+  //   // onSearch(search, regionValue);
 
-    // eslint-disable-next-line
-  }, [search, region]);
+  //   // eslint-disable-next-line
+  // }, [search, region]);
 
   return (
     <WrapperControls>
