@@ -7,10 +7,7 @@ import { InfoTag } from './InfoTag';
 import { InfoTagGroup } from './InfoTagGroup';
 import { InfoTitle } from './InfoTitle';
 import { WrapperInfo } from './WrapperInfo';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectNeighbors } from '../../store/details/details-selector';
-import { loadNeighborsByBorder } from '../../store/details/details-actions';
+import { useNeighbors } from '../use-neighbors';
 
 const Info = (props) => {
   const {
@@ -27,14 +24,7 @@ const Info = (props) => {
     borders = [],
     navigate,
   } = props;
-  const dispatch = useDispatch();
-  const neighbors = useSelector(selectNeighbors);
-
-  useEffect(() => {
-    if (borders.length) {
-      dispatch(loadNeighborsByBorder(borders));
-    }
-  }, [borders, dispatch]);
+  const [neighbors] = useNeighbors(borders);
 
   return (
     <WrapperInfo>

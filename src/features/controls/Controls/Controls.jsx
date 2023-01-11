@@ -1,9 +1,7 @@
+import { useRegion } from '../use-region';
 import { CustomSelect } from './CustomSelect';
 import Search from './Search/Search';
 import { WrapperControls } from './WrapperControls';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectRegion } from '../../store/controls/controls-selectors';
-import { setRegion } from '../../store/controls/controls-actions';
 
 const optionsMap = [
   {
@@ -29,13 +27,8 @@ const optionsMap = [
 ];
 const options = Object.values(optionsMap);
 
-const Controls = ({ onSearch }) => {
-  const dispatch = useDispatch();
-  const region = useSelector(selectRegion);
-
-  const handleSelect = (reg) => {
-    dispatch(setRegion(reg?.value || ''));
-  };
+const Controls = () => {
+  const [region, handleSelect] = useRegion();
 
   return (
     <WrapperControls>
