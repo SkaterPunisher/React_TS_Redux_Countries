@@ -1,4 +1,5 @@
 import React from 'react';
+import { CardProps } from './Card.props';
 import { CardBody } from './CardBody';
 import { CardImg } from './CardImg';
 import { CardList } from './CardList';
@@ -6,7 +7,7 @@ import { CardListItem } from './CardListItem';
 import { CardTitle } from './CardTitle';
 import { WrapperCard } from './WrapperCard';
 
-const Card = ({ img, name, info = [], onClick }) => {
+const Card = ({ img, name, info = [], onClick }: CardProps) => {
   return (
     <WrapperCard onClick={onClick}>
       <CardImg src={img} alt={name} />

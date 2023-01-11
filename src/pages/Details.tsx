@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
 import { Button } from '../ui/Button/Button';
@@ -14,7 +14,7 @@ const Details = () => {
       <Button onClick={() => navigate(-1)}>
         <IoArrowBack /> Назад
       </Button>
-      <CountryDetails name={name} navigate={navigate}/>
+      <CountryDetails name={name} navigate={navigate} />
     </div>
   );
 };

@@ -1,7 +1,12 @@
+import { ReactNode } from 'react';
 import { Container } from '../Container/Container';
 import { WrapperMain } from './WrapperMain';
 
-const Main = ({ children }) => {
+type MainProps = {
+  children: ReactNode;
+};
+
+const Main = ({ children }: MainProps) => {
   return (
     <WrapperMain>
       <Container>{children}</Container>

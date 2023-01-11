@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Main>
         <Routes>
-          <Route exact path='/' element={<HomePages />} />
+          <Route path='/' element={<HomePages />} />
           <Route path='/country/:name' element={<Details />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
