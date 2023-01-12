@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  clearDetails,
-  loadCountryByName,
-  selectDetails,
-} from './details-slice';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from 'store';
+import { selectDetails } from './details-selectors';
+import { clearDetails, loadCountryByName } from './details-slice';
 
-export const useDetails = (name) => {
-  const dispatch = useDispatch();
+export const useDetails = (name: string) => {
+  const dispatch = useAppDispatch();
   const { currentCountry, error, status } = useSelector(selectDetails);
 
   useEffect(() => {

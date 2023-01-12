@@ -1,30 +1,31 @@
+import { Region } from 'types/regions';
 import { useRegion } from '../use-region';
 import { CustomSelect } from './CustomSelect';
 import Search from './Search/Search';
 import { WrapperControls } from './WrapperControls';
 
-const optionsMap = [
-  {
+const optionsMap: Record<Region, { value: Region; label: Region }> = {
+  Africa: {
     value: 'Africa',
-    label: 'Африка',
+    label: 'Africa',
   },
-  {
+  America: {
     value: 'America',
-    label: 'Америка',
+    label: 'America',
   },
-  {
+  Asia: {
     value: 'Asia',
-    label: 'Азия',
+    label: 'Asia',
   },
-  {
+  Europe: {
     value: 'Europe',
-    label: 'Европа',
+    label: 'Europe',
   },
-  {
+  Oceania: {
     value: 'Oceania',
-    label: 'Океания',
+    label: 'Oceania',
   },
-];
+};
 const options = Object.values(optionsMap);
 
 const Controls = () => {
@@ -38,7 +39,7 @@ const Controls = () => {
         placeholder='По региону'
         isClearable //по Х можем очищать поле ввода
         isSearchable={false} //запрещаем поиск по вводу в него
-        value={optionsMap[region]}
+        value={region ? optionsMap[region] : ''}
         onChange={handleSelect}
       />
     </WrapperControls>

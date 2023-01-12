@@ -8,8 +8,9 @@ import { InfoTagGroup } from './InfoTagGroup';
 import { InfoTitle } from './InfoTitle';
 import { WrapperInfo } from './WrapperInfo';
 import { useNeighbors } from '../use-neighbors';
+import { InfoProps } from './Info.props';
 
-const Info = (props) => {
+const Info = (props: InfoProps) => {
   const {
     name,
     nativeName,
@@ -20,7 +21,7 @@ const Info = (props) => {
     subregion,
     topLevelDomain,
     currencies = [],
-    languages = [],
+    language = [],
     borders = [],
     navigate,
   } = props;
@@ -65,7 +66,7 @@ const Info = (props) => {
             </InfoListItem>
             <InfoListItem>
               <b>Языки:</b>{' '}
-              {languages.map((l) => (
+              {language.map((l) => (
                 <span key={l.name}>{l.name} </span>
               ))}
             </InfoListItem>
